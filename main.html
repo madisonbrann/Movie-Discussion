@@ -1,0 +1,131 @@
+<html>
+<head>
+  <title>Movie Discussion</title>
+
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="main.css">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+  <script src="app.js"></script>
+
+
+</head>
+<body ng-app="Movies">
+  <div class="row">
+  
+    <div class="col-md-8 col-md-offset-2">
+      <ui-view></ui-view>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="/home.html">
+    <div class="page-header">
+      <h1>
+      The Movie Discussion Board
+      <span style="font-size:20px; float:right;">
+        Discussions
+      </span>
+      </h1>
+            
+    </div>
+
+   <div ng-repeat="movie in movies | orderBy:'name'">
+     
+      <span style="font-size:20px; margin-left:10px;">
+           <a href="#/movies/{{movies.indexOf(movie)}}">{{movie.title}}</a> 
+      </span>
+      
+      <span style="font-size:20px; float: right; color: lightblue;">
+           {{movie.num_of_discussions}}
+      </span>
+      
+        
+      
+      <span>
+        <a href="#/movies/{{movies.indexOf(movie)}}"></a>
+      </span>
+    </div>
+    <form ng-submit="addMovie()"
+      style="margin-top:30px;">
+      <h3>Start Discussions For A Movie</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Movie"
+        ng-model="formContent"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+
+ 
+
+  </script>
+
+    <script type="text/ng-template" id="/movies.html">
+    <div class="page-header">
+      <h3>
+          {{movie.title}}
+          <span style="font-size:20px; float:right;">
+        Posts
+      </span>
+      </h3>
+    </div>
+
+    <div ng-repeat="discussion in movie.discussions">
+      <span style="font-size:20px; margin-left:10px;">
+       <a href="#/discussions/{{movie.discussions.indexOf(discussion)}}/{{movie.movieID}}">{{discussion.title}}</a> 
+      </span>
+       <span style="font-size:20px; float: right; color: lightblue;">
+       {{discussions.indexOf(discussion)}}
+           {{discussion.num_of_posts}}
+      </span>
+    </div>
+    <form ng-submit="addComment()"
+      style="margin-top:30px;">
+      <h3>Add a new discussion</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Comment"
+        ng-model="body"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+
+  </script>
+  
+  <script type="text/ng-template" id="/discussions.html">
+    <div class="page-header">
+      <h3>
+          {{discussion.title}}
+      </h3>
+    </div>
+
+    <div ng-repeat="comment in discussion.comments | orderBy:'-upvotes'">
+     <span style="font-size:15px; margin-left:10px; color:white;">
+      <br> {{comment.title}} 
+      </span>
+      
+    </div>
+    <form ng-submit="addComment()"
+      style="margin-top:30px;">
+      <h3>Comment</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder = "your thoughts..."
+        ng-model="body"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+
+  </script>
+  
+   
+</body>
+</html>
