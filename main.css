@@ -1,0 +1,22 @@
+body
+{
+    background-image: url("Movie Website Background.jpg");
+    background-color: black;
+}
+.col-md-8
+{
+    background-color: black;
+}
+h1
+{
+    color: orange;
+}
+h3
+{
+    color: orange;
+}
+.form-control
+{
+    background-color: white; 
+    color: blue;
+}
